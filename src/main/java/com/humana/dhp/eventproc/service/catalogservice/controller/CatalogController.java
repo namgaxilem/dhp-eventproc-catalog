@@ -19,9 +19,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("v1/catalog")
-@CrossOrigin(origins = "http://localhost:3000/", allowCredentials = "true")
-public class BaseController extends ExceptionController {
+@RequestMapping("v1")
+public class CatalogController extends ExceptionController {
     @Autowired
     FlowService flowService;
     @Autowired
@@ -37,7 +36,8 @@ public class BaseController extends ExceptionController {
     }
 
     @GetMapping("/flows")
-//    @PreAuthorize("hasRole('ROLE_group1')")
+//    @PreAuthorize("hasRole('Doc.Test')")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Object> getFlows(@RequestParam(required = false) Optional<String> page, @RequestParam(required = false) Optional<String> pageSize) {
         try {
 //            String pageNum = page.orElse("0");

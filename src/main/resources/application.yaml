@@ -31,7 +31,3 @@ server:
 #    allowedOrigins: "http://localhost:3000"
 #    allowedMethods: "*"
 
-azure:
-  activedirectory:
-    client-id: 9911dd89-b9c5-4de4-b3bb-265d5c214e91
-    app-id-uri: api://9911dd89-b9c5-4de4-b3bb-265d5c214e91

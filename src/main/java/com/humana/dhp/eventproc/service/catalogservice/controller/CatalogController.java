@@ -12,21 +12,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("v1")
 public class CatalogController extends ExceptionController {
     @Autowired
     FlowService flowService;
     @Autowired
     FlowVersionService flowVersionService;
 
-    @PostMapping("/flows")
+    @PostMapping("/v1/flows")
     public ResponseEntity<Object> importFlow(@Valid @RequestBody FlowRequest dataFlow) {
         FlowResponse flowResponse = flowService.importFlowDefinition(dataFlow);
         APIResponse apiResponse = new APIResponse();
@@ -35,9 +33,10 @@ public class CatalogController extends ExceptionController {
         return ResponseUtil.success(apiResponse);
     }
 
-    @GetMapping("/flows")
+    @GetMapping("/v1/flows")
 //    @PreAuthorize("hasRole('Doc.Test')")
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasAuthority('SCOPE_Obo.Catalog')")
     public ResponseEntity<Object> getFlows(@RequestParam(required = false) Optional<String> page, @RequestParam(required = false) Optional<String> pageSize) {
         try {
 //            String pageNum = page.orElse("0");
